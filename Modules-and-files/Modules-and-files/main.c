@@ -9,7 +9,7 @@ bool testSmartQSort(bool *errorCode) {
     smartQSort(testArray, 0, 20);
     for (int i = 0; i < 20; ++i) {
         if (testArray[i] > testArray[i + 1]) {
-            printf("the testSmartQSort was not passed");
+            printf("The testSmartQSort was not passed");
             *errorCode = true;
             return false;
         }
@@ -20,13 +20,13 @@ bool testSmartQSort(bool *errorCode) {
 int main(void) {
     bool errorCode = false;
     int array[1000] = { 0 };
-    int arrayLength = 100;
+    int arrayLength = -1;
 
     if (!testSmartQSort(&errorCode)) {
         return errorCode;
     }
 
-    readingAnArrayOfNumbersFromAFile(array, &errorCode);
+    readingAnArrayOfNumbersFromAFile(array, &arrayLength, &errorCode);
 
     printf("Unsorted array from file: ");
     for (int i = 0; i < arrayLength; ++i) {

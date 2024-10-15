@@ -60,7 +60,7 @@ void smartQSort(int array[], int start, int stop) {
 
 }
 
-void readingAnArrayOfNumbersFromAFile(int memoryForNumbers[], bool *errorCode) {
+void readingAnArrayOfNumbersFromAFile(int memoryForNumbers[], int *arrayLength, bool *errorCode) {
     FILE* file = fopen("data.txt", "r");
     if (file == NULL) {
         printf("File not found\n");
@@ -68,22 +68,10 @@ void readingAnArrayOfNumbersFromAFile(int memoryForNumbers[], bool *errorCode) {
         return;
     }
 
-    int lineRead = 0;
-    while (!feof(file)) {
-        char strTheCurrentElement[10];
-        char* endptrTheCurrentElement = NULL;
-        const int readBytes = scanf(file, "%s", strTheCurrentElement);
-        memoryForNumbers[lineRead] = (int)strtol(strTheCurrentElement, &endptrTheCurrentElement, 10);
-
-        if (*endptrTheCurrentElement != '\0') {
-            printf("Incorrect data\n");
-            *errorCode = true;
-        }
-        if (readBytes < 0) {
-            printf("readBytes < 0");
-            break;
-        }
-        ++lineRead;
+    int i = 0;
+    while (fscanf(file, "%d", &memoryForNumbers[i]) == 1) {
+        i++;
     }
     fclose(file);
+    *arrayLength = i;
 }
